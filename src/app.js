@@ -1,24 +1,23 @@
 import express from "express";
 
-import cors from 'cors';
+import cors from "cors";
 
 import config from "./config/config.js";
 
-import router from './routes/index.js';
+import router from "./routes/index.js";
 
 const {
-    app: {
-        port
-    }
+  app: { port },
 } = config;
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("pdfs"));
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: "*" }));
 
-app.use('/api', router);
+app.use("/api", router);
 
-app.listen(port, () => console.log(`Run on ${port}`))
+app.listen(port, () => console.log(`Run on ${port}`));
